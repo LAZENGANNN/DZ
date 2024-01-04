@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <style>
+       
+
+
+/* *{
+    border: 1px solid black;
+} */
+
+
+.root{
+    max-width: fit-content;
+}
+
+.buttonsN{   
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: fit-content;
+    
+}
+.buttonsD{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: fit-content;
+}
+.display{
+    min-height: 100px;
+    max-width: fit-content;
+    min-width: 250px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: larger;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* .result{
+    width: 100px;
+} */
+.button{
+    width: 50px;
+    height: 50px;
+    /* background: none;      */
+}
+.buttons{
+    display: flex;
+    width: fit-content;
+    border: 1px solid black;
+}
+.eq{
+    background-color: lightskyblue;
+}
+
+
+    </style>
+</head>
+<body>
+<div class="root" id="root"> 
+<div class="display" id="display">
+    <!-- <div class="result" id="result"></div> -->
+</div>
+<div class="buttons">
+    <div class="buttonsN" id="buttonsN"></div>  
+    <div class="buttonsD" id="buttonsD"></div>  
+</div>
+
+
+
+</div>
+
+
+
+
+ <script>
+const root = document.getElementById('root')
+const display = document.getElementById('display')
+const buttonsN = document.getElementById('buttonsN')
+const buttonsD = document.getElementById('buttonsD')
+const bNumbers = [1,2,3,4,5,6,7,8,9,'+/-',0,'.','<-', 'C', '/', '*', '-', '+']
+
+
+
+
+function createButtons (elem) {    
+    const button = document.createElement('button')
+    button.innerText = elem
+    button.classList.add('button')
+    button.setAttribute('id', elem)
+    if(elem === '<-'){
+        button.addEventListener('click', () => (display.innerText = display.innerText.slice(0,-1)))
+        buttonsD.append(button)
+        return null
+    }
+    if(elem === 'C'){
+        button.addEventListener('click', () => (display.innerText = null))
+        buttonsD.append(button)
+        return null
+    }
+    button.addEventListener('click', () => (display.innerText = display.innerText + elem))
+    if(elem === '/' || elem === '*' || elem === '-' || elem === '+'){
+        buttonsD.append(button)
+        return null
+    }
+    buttonsN.append(button)   
+}
+bNumbers.map(elem => createButtons(elem))
+
+function equally(expr) {
+    // console.log(typeof expr)
+    const result =  eval(expr)
+    display.innerText = (`${expr}
+    ${result}`)
+}
+
+
+function createEqually() {
+    const button = document.createElement('button')
+    button.innerText = '='
+    button.classList.add('eq', 'button')
+    button.setAttribute('id', '=')
+    button.addEventListener('click', () => (equally((display.innerText))))
+
+
+
+
+    buttonsD.append(button)
+}
+
+createEqually()
+
+
+</script>   
+
+</body>
+</html>
