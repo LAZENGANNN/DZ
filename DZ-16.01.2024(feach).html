@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HTML</title>
+    <style>
+.root{
+display: grid;
+    gap: 20px;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.card{
+    max-width: 250px;
+
+    display: flex;
+    flex-direction: column ;
+    border: 1px solid black;
+}
+
+.img{
+    max-width: 100px;
+    max-height: 100px;
+}
+.title{
+    font-family: Arial, sans-serif;
+    font-size: large ;
+}
+.price{
+    font-size: xx-large;
+    color: red;
+}
+.rating{
+        display: flex;
+    flex-direction: row;
+    border: yellow;
+    justify-content: space-around;
+}
+.desc{
+    color: lightgray;
+    font-size: small;
+}
+
+
+    </style>
+</head>
+<body>
+
+<div id="root" class="root">
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<script>
+    const requestURL = 'https://fakestoreapi.com/products'
+
+
+    const root = document.getElementById('root')
+
+
+
+function createDiv(json){
+    const div = document.createElement('div')
+    div.classList.add('card')
+
+
+
+    const img = document.createElement('img')
+    console.log(json.image)
+    img.classList.add('img')
+    img.src = json.image
+
+    const title = document.createElement('p')
+    title.innerText = json.title
+    title.classList.add('title')
+
+    const description = document.createElement('p')
+    description.innerText = json.description
+    description.classList.add('desc')
+
+    const price = document.createElement('p')
+    price.innerText = `${json.price}$`
+    price.classList.add('price')
+
+    const rating = document.createElement('div')
+    rating.classList.add('rating')
+    const rate = document.createElement('p')
+    rate.innerText = `${json.rating.rate}★`
+    const count = document.createElement('p')
+    count.innerText = `bought ${json.rating.count} times`
+    rating.append(rate, count)
+
+
+    
+    div.append(title) 
+    div.append(img)
+    div.append(description)
+    div.append(price)
+    div.append(rating)
+    root.append(div)
+
+}
+
+
+function request(url){
+    fetch(url)
+        .then(res=>res.json())
+        .then(json=> json?.forEach(elem => createDiv(elem)))
+}
+
+request(requestURL)
+
+
+</script>
+
+</body>
+</html>
