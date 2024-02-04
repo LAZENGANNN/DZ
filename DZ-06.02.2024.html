@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HTML</title>
+    <style>
+
+
+    </style>
+</head>
+<body>
+<script>
+    
+// Тема 1: Строки
+const str = "JavaScript is awesome!";
+console.log(str);
+
+// Используя методы строк, преобразуйте все символы в верхний регистр и затем в нижний.
+const upper = str.toUpperCase();
+const lower = str.toLowerCase();
+console.log(upper, lower);
+
+// Найдите позицию подстроки "awesome" в исходной строке.
+const index = str.indexOf("awesome");
+console.log(index);
+
+// 2. Слияние и шаблоны строк
+// Объедините две строки "Hello" и "World" с пробелом между ними.
+const hello = "Hello";
+const world = "World";
+const HW = hello + " " + world;
+console.log(HW);
+
+// Используйте шаблонные строки (template literals), чтобы вставить переменные с именем и фамилией в строку приветствия, например: "Привет, [имя] [фамилия]!"
+const name = "Иван";
+const surname = "Иванов";
+const welcome = `Привет, ${name} ${surname}!`;
+console.log(welcome);
+
+// Тема 2: Объекты
+// 1. Создание и использование объектов
+// Создайте объект person с свойствами name, age и hobbies. Заполните объект соответствующими значениями.
+const person = {
+  name: 'Саня',
+  age: 25,
+  hobbies: ['читать","танцевать'],
+  // Добавьте в объект метод, который выводит имя и возраст человека в консоль.
+  sayHello: function() {
+  console.log(`Меня зовут ${name} и мне ${age} лет.`)},
+};
+
+// 2. Доступ к свойствам и их изменение
+// Измените значение свойства age в объекте person.
+person.age = 26;
+
+// Добавьте новое свойство favoriteColor в объект person.
+person.favoriteColor = 'жёлтый'
+
+// Выведите в консоль обновленный объект
+console.log(person);
+
+// Тема 3: Массивы
+// 1. Работа с массивами
+// Создайте массив с именами пяти разных фруктов.
+const fruits = ["яблоко", "банан", "апельсин", "груша", "киви"];
+
+// Используя цикл, выведите каждый фрукт в консоль.
+for (let fruit of fruits) {
+  console.log(fruit);
+}
+
+// Добавьте новый фрукт в начало и конец массива.
+fruits.unshift("ананас");
+fruits.push("манго");
+
+// Выведите в консоль измененный массив
+console.log(fruits);
+
+// 2. Методы массивов
+// Отсортируйте массив фруктов в алфавитном порядке.
+fruits.sort();
+
+// Используйте метод map для создания нового массива, где каждый фрукт написан заглавными буквами
+const upFruits = fruits.map(elem => elem.toUpperCase());
+
+// Выведите в консоль новый массив
+console.log(upFruits);
+
+// Тема 4: Функции
+// 1. Создание и вызов функций
+// Напишите функцию greet, которая принимает имя и выводит приветствие: "Привет, [имя]!".
+const greet = (name) => {
+  console.log(`Привет, ${name}!`);
+};
+
+// Вызовите функцию greet с несколькими разными именами.
+greet("Алексей");
+greet("Мария");
+greet("Петр");
+
+// 2. Функции высшего порядка
+// Напишите функцию processArray, которая принимает массив и функцию обработчик. Функция должна применять переданный обработчик к каждому элементу массива и возвращать новый массив.
+const processArray = (array, handler) => {
+  const result = [];
+  for (let element of array) {
+    result.push(handler(element));
+  }
+  return result;
+};
+//Работа функции
+const nums = [1, 2, 3, 4, 5];
+const x2 = (number) => {
+  return number * 2;
+};
+const doubledNumbers = processArray(nums, x2);
+console.log(doubledNumbers); 
+
+// Тема 5: Промисы
+// 1. Создание промисов
+// Создайте промис, который успешно разрешается через 2 секунды с сообщением "Промис выполнен!".
+const promise1 = new Promise((resolve, reject) => {
+  setTimeout(() => {resolve("Промис выполнен!");}, 2000);
+});
+
+// Создайте промис, который отклоняется через 3 секунды с ошибкой "Промис отклонён!".
+const promise2 = new Promise((resolve, reject) => {
+  setTimeout(() => {reject(new Error("Промис отклонён!"));}, 3000);
+});
+
+// 2. Использование промисов
+// Используйте метод then для обработки результата успешно выполненного промиса.
+promise1.then((value) => {
+  console.log(value); 
+});
+
+// Используйте метод catch для обработки ошибки отклонённого промиса.
+promise2.catch((error) => {
+  console.error(error); 
+});
+
+// Используйте метод finally для выполнения кода после завершения промиса, независимо от его результата.
+promise1.finally(() => {
+  console.log("Промис 1 завершён.");
+});
+
+promise2.finally(() => {
+  console.log("Промис 2 завершён.");
+});
+
+</script>
+</body>
+</html>
